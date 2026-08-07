@@ -39,7 +39,7 @@ tabBtns.forEach(btn => {
   });
 });
 
-const API_URL = 'cloudflared tunnel --url http://localhost:3000';
+const API_URL = 'https://charge-submissions-transport-louisiana.trycloudflare.com';
 
 async function callApi(url, body) {
   const res = await fetch(url, {
