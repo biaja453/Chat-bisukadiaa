@@ -65,7 +65,7 @@ function renderMe() {
 
 // ---------- SOCKET ----------
 function connectSocket() {
-  socket = io({ auth: { token } });
+  socket = io("cloudflared tunnel --url http://localhost:3000", { auth: { token } });
 
   socket.on('new_message', (msg) => {
     // Refresh urutan room (last message)
