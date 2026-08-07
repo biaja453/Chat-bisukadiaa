@@ -39,6 +39,8 @@ tabBtns.forEach(btn => {
   });
 });
 
+const API_URL = 'cloudflared tunnel --url http://localhost:3000';
+
 async function callApi(url, body) {
   const res = await fetch(url, {
     method: 'POST',
