@@ -42,7 +42,7 @@ tabBtns.forEach(btn => {
 const API_URL = 'https://charge-submissions-transport-louisiana.trycloudflare.com';
 
 async function callApi(url, body) {
-  const res = await fetch(url, {
+  const res = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
