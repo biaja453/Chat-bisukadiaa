@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BISUKADIAA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="app-body">
+
+  <!-- ===== SIDEBAR SERVER/GRUP (kiri, seperti Discord) ===== -->
+  <nav class="rail">
+    <button id="hamburgerBtn" class="rail-icon hamburger" title="Kontak">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="rail-groups" id="railGroups"></div>
+    <button id="addGroupBtn" class="rail-icon add-group" title="Buat / Gabung Grup">+</button>
+  </nav>
+
+  <!-- ===== DRAWER KONTAK (muncul saat hamburger diklik) ===== -->
+  <aside class="contacts-drawer" id="contactsDrawer">
+    <div class="drawer-header">
+      <h2>Kontak Tersimpan</h2>
+      <button id="closeDrawerBtn" class="icon-btn">✕</button>
+    </div>
+    <form id="addContactForm" class="add-contact-form">
+      <input type="text" id="addContactInput" placeholder="Cari username untuk ditambahkan…">
+      <button type="submit">Tambah</button>
+    </form>
+    <p class="drawer-error" id="contactError"></p>
+    <div class="contacts-list" id="contactsList"></div>
+  </aside>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- ===== PANEL DAFTAR ROOM (grup + dm) ===== -->
+  <aside class="room-panel">
+    <div class="room-panel-header">
+      <div class="me" id="meBox">
+        <div class="avatar" id="meAvatar"></div>
+        <div class="me-info">
+          <span class="me-name" id="meName">—</span>
+          <span class="me-role" id="meRole">—</span>
+        </div>
+      </div>
+      <button id="passwordBtn" class="icon-btn" title="Ganti Password">🔑</button>
+      <button id="adminBtn" class="icon-btn hidden" title="Panel Admin">⚙</button>
+      <button id="logoutBtn" class="icon-btn" title="Keluar">⏻</button>
+    </div>
+    <div class="room-list" id="roomList"></div>
+  </aside>
+
+  <!-- ===== AREA CHAT UTAMA ===== -->
+  <main class="chat-main">
+    <div class="chat-empty" id="chatEmpty">
+      <div class="brand-mark big">B</div>
+      <h2>Selamat datang di BISUKADIAA</h2>
+      <p>Pilih grup atau kontak di sebelah kiri untuk mulai mengobrol.</p>
+    </div>
+
+    <div class="chat-active hidden" id="chatActive">
+      <header class="chat-header">
+        <button id="backBtn" class="icon-btn back-btn" title="Kembali">←</button>
+        <div class="avatar" id="roomAvatar"></div>
+        <div class="chat-header-info">
+          <span class="room-title" id="roomTitle">—</span>
+          <span class="room-sub" id="roomSub">—</span>
+        </div>
+        <button id="inviteBtn" class="icon-btn hidden" title="Salin kode undangan">🔗</button>
+      </header>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="typing-indicator hidden" id="typingIndicator"></div>
+
+      <form class="composer" id="composerForm">
+        <input type="text" id="messageInput" placeholder="Tulis pesan…" autocomplete="off">
+        <button type="submit" class="send-btn" title="Kirim">➤</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ===== MODAL BUAT / GABUNG GRUP ===== -->
+  <div class="modal hidden" id="groupModal">
+    <div class="modal-box">
+      <h3>Grup</h3>
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" data-mtab="create">Buat Grup</button>
+        <button class="modal-tab-btn" data-mtab="join">Gabung Grup</button>
+      </div>
+      <form id="createGroupForm" class="modal-form active">
+        <input type="text" id="newGroupName" placeholder="Nama grup baru…" required>
+        <button type="submit" class="btn-primary">Buat</button>
+      </form>
+      <form id="joinGroupForm" class="modal-form">
+        <input type="text" id="joinGroupCode" placeholder="Masukkan kode undangan…" required>
+        <button type="submit" class="btn-primary">Gabung</button>
+      </form>
+      <p class="modal-error" id="groupModalError"></p>
+      <button class="modal-close" id="closeGroupModal">✕</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL GANTI PASSWORD ===== -->
+  <div class="modal hidden" id="passwordModal">
+    <div class="modal-box">
+      <h3>Ganti Password</h3>
+      <form id="passwordForm" class="modal-form active">
+        <input type="password" id="pwCurrent" placeholder="Password saat ini" required>
+        <input type="password" id="pwNew" placeholder="Password baru" required>
+        <ul class="pw-checklist" id="pwChecklistModal">
+          <li data-rule="len">Minimal 8 karakter</li>
+          <li data-rule="lower">Ada huruf kecil (a-z)</li>
+          <li data-rule="upper">Ada huruf besar (A-Z)</li>
+          <li data-rule="num">Ada angka (0-9)</li>
+          <li data-rule="sym">Ada simbol (!@#$%…)</li>
+        </ul>
+        <button type="submit" class="btn-primary">Simpan Password Baru</button>
+      </form>
+      <p class="modal-error" id="pwModalError"></p>
+      <p class="auth-success" id="pwModalSuccess"></p>
+      <button class="modal-close" id="closePasswordModal">✕</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL ADMIN PANEL ===== -->
+  <div class="modal hidden" id="adminModal">
+    <div class="modal-box wide">
+      <h3>Panel Admin</h3>
+      <div class="admin-users" id="adminUsers"></div>
+      <button class="modal-close" id="closeAdminModal">✕</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

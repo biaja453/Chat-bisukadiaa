@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BISUKADIAA — Ngobrol Tanpa Batas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+
+  <div class="auth-bg">
+    <span class="bubble b1"></span>
+    <span class="bubble b2"></span>
+    <span class="bubble b3"></span>
+    <span class="bubble b4"></span>
+  </div>
+
+  <main class="auth-wrap">
+    <div class="auth-brand">
+      <div class="brand-mark">B</div>
+      <h1>BISUKADIAA</h1>
+      <p>Grup, kontak, dan obrolan realtime — dalam satu tempat.</p>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">Masuk</button>
+        <button class="tab-btn" data-tab="register">Daftar</button>
+      </div>
+
+      <form id="loginForm" class="auth-form active">
+        <label>Username
+          <input type="text" id="loginUsername" autocomplete="username" required>
+        </label>
+        <label>Password
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </label>
+        <p class="auth-error" id="loginError"></p>
+        <button type="submit" class="btn-primary">Masuk</button>
+      </form>
+
+      <form id="registerForm" class="auth-form">
+        <label>Username
+          <input type="text" id="regUsername" minlength="3" required>
+        </label>
+        <label>Password
+          <input type="password" id="regPassword" required>
+        </label>
+        <ul class="pw-checklist" id="pwChecklist">
+          <li data-rule="len">Minimal 8 karakter</li>
+          <li data-rule="lower">Ada huruf kecil (a-z)</li>
+          <li data-rule="upper">Ada huruf besar (A-Z)</li>
+          <li data-rule="num">Ada angka (0-9)</li>
+          <li data-rule="sym">Ada simbol (!@#$%…)</li>
+        </ul>
+        <p class="auth-hint">Kamu langsung dapat grup pribadi sebagai admin grup itu. Setelah daftar, login manual ya.</p>
+        <p class="auth-error" id="regError"></p>
+        <p class="auth-success" id="regSuccess"></p>
+        <button type="submit" class="btn-primary">Buat Akun</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
