@@ -65,7 +65,7 @@ function renderMe() {
 
 // ---------- SOCKET ----------
 function connectSocket() {
-  socket = io('https://charge-submissions-transport-louisiana.trycloudflare.com', { auth: { token } });
+  socket = io('https://recovery-scott-participants-clearly.trycloudflare.com', { auth: { token } });
 
   socket.on('new_message', (msg) => {
     // Refresh urutan room (last message)
